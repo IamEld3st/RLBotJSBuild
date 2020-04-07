@@ -40,9 +40,6 @@ with ZipFile(f"./dist/node-rlbot-{latest_lts['version']}-{latest_lts['lts']}.zip
     # Iterate over all the files in directory
     for folderName, subfolders, filenames in os.walk('./build/'):
         for filename in filenames:
-            # create complete filepath of file in directory
-            filePath = os.path.join(folderName, filename)
-            # Add file to zip
-            zipObj.write(filePath)
+            zipObj.write(filename)
 
 shutil.rmtree('./build/')
