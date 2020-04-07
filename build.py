@@ -36,7 +36,13 @@ os.system(".\\build\\npm.cmd uninstall -g windows-build-tools")
 if not os.path.exists('./dist/'):
     os.mkdir('./dist/')
 
-build = PyZipFile(
-    f"./dist/node-rlbot-{latest_lts['version']}-{latest_lts['lts']}.zip")
-build.writepy('./build/')
+with ZipFile(f"node-rlbot-{latest_lts['version']}-{latest_lts['lts']}}.zip", 'w') as zipObj:
+    # Iterate over all the files in directory
+    for folderName, subfolders, filenames in os.walk('./build/'):
+        for filename in filenames:
+            # create complete filepath of file in directory
+            filePath = os.path.join(folderName, filename)
+            # Add file to zip
+            zipObj.write(filePath)
+
 shutil.rmtree('./build/')
