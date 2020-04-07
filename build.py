@@ -38,6 +38,6 @@ if not os.path.exists('./dist/'):
     os.mkdir('./dist/')
 
 shutil.make_archive(
-    f"./dist/node-rlbot-{latest_lts['version']}-{latest_lts['lts']}.zip", 'zip', './build/')
+    f"./dist/node-rlbot-{latest_lts['version']}-{latest_lts['lts']}", 'zip', './build/')
 
 shutil.rmtree('./build/')
