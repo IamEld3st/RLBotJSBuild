@@ -28,15 +28,15 @@ uncompressed_data.extractall('./')
 os.rename(f"./node-{latest_lts['version']}-win-x64/", "./build/")
 
 # Execute build
-os.system("./build/npm install -g windows-build-tools")
-os.system("./build/npm install -g SuperVK/RLBotJS")
-os.system("./build/npm uninstall -g windows-build-tools")
+os.system(".\\build\\npm.cmd install -g windows-build-tools")
+os.system(".\\build\\npm.cmd install -g SuperVK/RLBotJS")
+os.system(".\\build\\npm.cmd uninstall -g windows-build-tools")
 
 # Zip the dist
 if not os.path.exists('./dist/'):
     os.mkdir('./dist/')
 
 build = PyZipFile(
-    f"./dist/node-rlbot-{latest_lts['version']}-{latest_lts['lts']}")
+    f"./dist/node-rlbot-{latest_lts['version']}-{latest_lts['lts']}.zip")
 build.writepy('./build/')
 shutil.rmtree('./build/')
