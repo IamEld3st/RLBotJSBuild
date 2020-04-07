@@ -4,6 +4,7 @@ import requests
 import json
 import os
 import shutil
+from pathlib import Path
 from zipfile import ZipFile, PyZipFile
 from io import BytesIO
 
@@ -40,6 +41,11 @@ with ZipFile(f"./dist/node-rlbot-{latest_lts['version']}-{latest_lts['lts']}.zip
     # Iterate over all the files in directory
     for folderName, subfolders, filenames in os.walk('./build/'):
         for filename in filenames:
-            zipObj.write(filename)
+            # create complete filepath of file in directory
+            filePath = os.path.join(folderName, filename)
+            path = Path(filePath)
+
+            # Add file to zip
+            zipObj.write(path, Path(*path.parts[2:]))
 
 shutil.rmtree('./build/')
